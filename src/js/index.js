@@ -32,15 +32,18 @@ const renderSpinner = function (parentEl) {
 const showRecipe = async function () {
   try {
     const id = window.location.hash.slice(1);
+    console.log(id);
 
-    if(!id) return;
+    // if(!id) return;
 
     // 1. Loading recipe
     renderSpinner(recipeContainer);
-    const res = await fetch(
-            // "https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886"
-            "https://forkify-api.herokuapp.com/api/v2/recipes/${id}"
+
+    const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
     );
+
+    // const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcb34`
+    // );
 
     const data = await res.json();
 
@@ -48,7 +51,7 @@ const showRecipe = async function () {
       throw new Error(`${data.message} (${res.status})`);
     }
 
-    // console.log(res, data);
+    console.log(res, data);
 
     let { recipe } = data.data;
 
@@ -161,20 +164,20 @@ const showRecipe = async function () {
 
     recipeContainer.insertAdjacentHTML("afterbegin", markup);
 
-    console.log(recipe.ingredients.map(ing => {
-                return `
-                  <li class="recipe__ingredient">
-                    <svg class="recipe__icon">
-                      <use href="${icons}#icon-check"></use>
-                    </svg>
-                    <div class="recipe__quantity">${ing.quantity}</div>
-                    <div class="recipe__description">
-                      <span class="recipe__unit">${ing.unit}</span>
-                      ${ing.description}
-                    </div>
-                  </li>
-                `
-    }));
+    // console.log(recipe.ingredients.map(ing => {
+    //             return `
+    //               <li class="recipe__ingredient">
+    //                 <svg class="recipe__icon">
+    //                   <use href="${icons}#icon-check"></use>
+    //                 </svg>
+    //                 <div class="recipe__quantity">${ing.quantity}</div>
+    //                 <div class="recipe__description">
+    //                   <span class="recipe__unit">${ing.unit}</span>
+    //                   ${ing.description}
+    //                 </div>
+    //               </li>
+    //             `
+    // }).join(""));
 
   } catch (err) {
     alert(err)
@@ -183,7 +186,13 @@ const showRecipe = async function () {
 
 // showRecipe();
 
-["hashchange", "load"].forEach(evt => window.addEventListener(evt, showRecipe));
+// ['hashchange', 'load'].forEach(evt => window.addEventListener(evt, showRecipe));
 
-// window.addEventListener("hasRecipe", showRecipe);
+
+// let evtArr = ["hashchange", "load"];
+
+;["hashchange", "load"].forEach(evt => window.addEventListener(evt, showRecipe))
+// evtArr.forEach(evt => window.addEventListener(evt, showRecipe));
+
+// window.addEventListener("hashchange", showRecipe);
 // window.addEventListener("load", showRecipe);
