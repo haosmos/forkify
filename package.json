@@ -26,5 +26,8 @@
     "parcel-transformer-html-datasrc": "^1.3.3",
     "sass": "^1.46.0",
     "sharp": "^0.29.3"
+  },
+  "dependencies": {
+    "fractional": "^1.0.0"
   }
 }
