@@ -2,15 +2,15 @@ import * as model from "./model.js"
 import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
+import paginationView from "./views/paginationView.js";
 
 // if (module.hot) {
 //   module.hot.accept();
 // }
 
-
 const controlRecipes = async function () {
   try {
-    const id = window.location.hash.slice(3);
+    const id = window.location.hash.slice(1);
 
     if(!id) return;
 
@@ -19,7 +19,7 @@ const controlRecipes = async function () {
     // 1. Loading recipe
     await model.loadRecipe(id);
 
-    console.log(model.state.recipe);
+    //console.log(model.state.recipe);
 
     // 2. Rendering recipe
     recipeView.render(model.state.recipe);
@@ -32,7 +32,7 @@ const controlRecipes = async function () {
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
-    console.log(resultsView);
+    //console.log(resultsView);
 
     // 1. Get search query
     const query = searchView.getQuery();
@@ -43,15 +43,28 @@ const controlSearchResults = async function () {
 
     // 3. Render results
     //resultsView.render(model.state.search.results)
-    resultsView.render(model.getSearchResultsPage());
+    resultsView.render(model.getSearchResultsPage(3));
+
+    // 4. Render initial pagination buttons
+    paginationView.render(model.state.search);
+
   } catch (err) {
     console.log(err);
   }
 };
 
+const controlPagination = function (goToPage) {
+  // 1. Render NEW results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  // 2. Render NEW pagination buttons
+  paginationView.render(model.state.search);
+}
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 }
 
 init();

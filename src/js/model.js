@@ -52,8 +52,8 @@ export const loadSearchResults = async function (query) {
             };
         });
 
-        console.log(state.search);
-        console.log(state.recipe);
+        // console.log(state.search);
+        // console.log(state.recipe);
 
     } catch (err) {
         console.error(`${err} 😵‍💫😵‍💫😵‍💫`);
