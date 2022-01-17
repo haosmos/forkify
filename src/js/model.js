@@ -12,15 +12,15 @@ export const state = {
 export const loadRecipe = async function (id) {
     try {
         const data = await getJSON(`${API_URL}${id}`);
-        const {  recipe } = data.data;
+        const { recipe } = data.data;
 
         state.recipe = {
-            id: recipe.id,
-            title: recipe.title,
-            published: recipe.publisher,
-            sourceUrl: recipe.source_url,
-            image: recipe.image_url,
-            servings: recipe.servings,
+            id:          recipe.id,
+            title:       recipe.title,
+            published:   recipe.publisher,
+            sourceUrl:   recipe.source_url,
+            image:       recipe.image_url,
+            servings:    recipe.servings,
             cookingTime: recipe.cooking_time,
             ingredients: recipe.ingredients,
         };
@@ -42,15 +42,16 @@ export const loadSearchResults = async function (query) {
 
         state.search.results = data.data.recipes.map(rec => {
             return {
-                id: rec.id,
-                title: rec.title,
+                id:        rec.id,
+                title:     rec.title,
                 published: rec.publisher,
                 sourceUrl: rec.source_url,
-                image: rec.image_url,
+                image:     rec.image_url,
             };
         });
 
-        console.log(state.search.results);
+        console.log(state.search);
+        console.log(state.recipe);
 
     } catch (err) {
         console.error(`${err} 😵‍💫😵‍💫😵‍💫`);
@@ -58,5 +59,5 @@ export const loadSearchResults = async function (query) {
     }
 };
 
-loadSearchResults("pizza");
+loadSearchResults();
 
