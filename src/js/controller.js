@@ -3,13 +3,14 @@ import recipeView from "./views/recipeView.js";
 import searchView from "./views/searchView.js";
 import resultsView from "./views/resultsView.js";
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
+
 
 const controlRecipes = async function () {
   try {
-    const id = window.location.hash.slice(1);
+    const id = window.location.hash.slice(3);
 
     if(!id) return;
 
@@ -41,7 +42,8 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3. Render results
-    resultsView.render(model.state.search.results)
+    //resultsView.render(model.state.search.results)
+    resultsView.render(model.getSearchResultsPage());
   } catch (err) {
     console.log(err);
   }
@@ -53,16 +55,3 @@ const init = function () {
 }
 
 init();
-
-// controlRecipes();
-
-// ['hashchange', 'load'].forEach(evt => window.addEventListener(evt, controlRecipes));
-
-
-// let evtArr = ["hashchange", "load"];
-
-
-// evtArr.forEach(evt => window.addEventListener(evt, controlRecipes));
-
-// window.addEventListener("hashchange", controlRecipes);
-// window.addEventListener("load", controlRecipes);
