@@ -15,7 +15,19 @@ class RecipeView extends View {
         // window.addEventListener("load", handler);
     }
 
+    addHandlerUpdateServings(handler) {
+        this._parentElement.addEventListener("click", function(e) {
+            const btn = e.target.closest(".btn--update-servings");
+            if(!btn) return;
+            const { updateTo } = btn.dataset;
+            if (+updateTo > 0) handler(+updateTo);
+        })
+    }
+
+
     _generateMarkup() {
+        // console.log(this._data.ingredients);
+
         return `
             <figure class="recipe__fig">
               <img src="${this._data.image}" alt="Tomato" class="recipe__img" />
@@ -38,16 +50,16 @@ class RecipeView extends View {
                 <svg class="recipe__info-icon">
                   <use href="${icons}#icon-users"></use>
                 </svg>
-                <span class="recipe__info-data recipe__info-data--people">4</span>
-                <span class="recipe__info-text">${this._data.servings}</span>
+                <span class="recipe__info-data recipe__info-data--people">${this._data.servings}</span>
+                <span class="recipe__info-text">servings</span>
 
                 <div class="recipe__info-buttons">
-                  <button class="btn--tiny btn--increase-servings">
+                  <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings - 1}">
                     <svg>
                       <use href="${icons}#icon-minus-circle"></use>
                     </svg>
                   </button>
-                  <button class="btn--tiny btn--increase-servings">
+                  <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings + 1}">
                     <svg>
                       <use href="${icons}#icon-plus-circle"></use>
                     </svg>
@@ -68,9 +80,7 @@ class RecipeView extends View {
             <div class="recipe__ingredients">
               <h2 class="heading--2">Recipe ingredients</h2>
               <ul class="recipe__ingredient-list">
-                ${this._data.ingredients
-                  .map(this._generateMarkupIngredient)
-                  .join("")}
+                ${this._data.ingredients.map(this._generateMarkupIngredient).join("")}
             </div>
 
             <div class="recipe__directions">
