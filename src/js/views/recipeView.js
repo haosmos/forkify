@@ -87,9 +87,7 @@ class RecipeView extends View {
               <h2 class="heading--2">How to cook it</h2>
               <p class="recipe__directions-text">
                 This recipe was carefully designed and tested by
-                <span class="recipe__publisher">${
-                  this._data.publisher
-                }</span>. Please check out
+                <span class="recipe__publisher">${this._data.publisher}</span>. Please check out
                 directions at their website.
               </p>
               <a
@@ -104,7 +102,7 @@ class RecipeView extends View {
               </a>
             </div>
         `;
-  }
+    }
 
     _generateMarkupIngredient(ing) {
         return `
@@ -112,9 +110,7 @@ class RecipeView extends View {
                <svg class="recipe__icon">
                  <use href="${icons}#icon-check"></use>
                </svg>
-               <div class="recipe__quantity">${
-                 ing.quantity ? new Fraction(ing.quantity).toString() : ""
-               }</div>
+               <div class="recipe__quantity">${ing.quantity ? new Fraction(ing.quantity).toString() : ""}</div>
                <div class="recipe__description">
                  <span class="recipe__unit">${ing.unit}</span>
                  ${ing.description}
@@ -122,6 +118,7 @@ class RecipeView extends View {
             </li>
         `;
     }
+
 }
 
 export default new RecipeView();
