@@ -55,6 +55,8 @@ export const loadSearchResults = async function (query) {
         // console.log(state.search);
         // console.log(state.recipe);
 
+        state.search.page = 1;
+
     } catch (err) {
         console.error(`${err} 😵‍💫😵‍💫😵‍💫`);
         throw err;
