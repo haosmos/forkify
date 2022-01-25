@@ -13,7 +13,7 @@ export default class View {
     }
 
     update(data) {
-        console.log(data);
+        // console.log(data);
 
         this._data = data;
         const updatedMarkup = this._generateMarkup();
@@ -22,24 +22,24 @@ export default class View {
         const newElements = Array.from(newDOM.querySelectorAll("*"));
         const curElements = Array.from(this._parentElement.querySelectorAll("*"));
 
-        console.log(curElements);
-        console.log(newElements);
+        // console.log(curElements);
+        // console.log(newElements);
 
         newElements.forEach((newEl, i) => {
             const curEl = curElements[i];
 
             // Update changed TEXT
             if(!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== "") {
-                console.log("🚀🚀🚀", newEl.firstChild.nodeValue.trim());
+                // console.log("🚀🚀🚀", newEl.firstChild.nodeValue.trim());
 
                 curEl.textContent = newEl.textContent;
             }
 
             // Update changed ATTRIBUTES
             if(!newEl.isEqualNode(curEl)) {
-                console.log(Array.from(newEl.attributes));
+                // console.log(Array.from(newEl.attributes));
 
-                console.log(data);
+                // console.log(data);
 
                 Array.from(newEl.attributes).forEach((attr) => {
                     curEl.setAttribute(attr.name, attr.value);
