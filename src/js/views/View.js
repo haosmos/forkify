@@ -4,7 +4,10 @@ export default class View {
     _data;
 
     render(data, render = true) {
-        if(!data || (Array.isArray(data) && data.length === 0)) return this.renderError();
+        if (!data || (Array.isArray(data) && data.length ===
+                      0)) {
+            return this.renderError();
+        }
 
         this._data = data;
         const markup = this._generateMarkup();
@@ -21,7 +24,8 @@ export default class View {
         this._data = data;
         const updatedMarkup = this._generateMarkup();
 
-        const newDOM = document.createRange().createContextualFragment(updatedMarkup);
+        const newDOM = document.createRange()
+            .createContextualFragment(updatedMarkup);
         const newElements = Array.from(newDOM.querySelectorAll("*"));
         const curElements = Array.from(this._parentElement.querySelectorAll("*"));
 
@@ -32,14 +36,15 @@ export default class View {
             const curEl = curElements[i];
 
             // Update changed TEXT
-            if(!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== "") {
+            if (!newEl.isEqualNode(curEl) &&
+                newEl.firstChild?.nodeValue.trim() !== "") {
                 // console.log("🚀🚀🚀", newEl.firstChild.nodeValue.trim());
 
                 curEl.textContent = newEl.textContent;
             }
 
             // Update changed ATTRIBUTES
-            if(!newEl.isEqualNode(curEl)) {
+            if (!newEl.isEqualNode(curEl)) {
                 // console.log(Array.from(newEl.attributes));
 
                 // console.log(data);
