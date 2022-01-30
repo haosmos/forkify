@@ -2,7 +2,6 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "Recipe finder app with custom recipe uploads",
-  "main": "index.js",
   "scripts": {
     "dev": "parcel index.html",
     "build": "parcel build index.html --public-url ./ --dist-dir public"
