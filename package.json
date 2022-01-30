@@ -4,7 +4,7 @@
   "description": "Recipe finder app with custom recipe uploads",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html --public-url ./ --dist-dir public"
+    "build": "parcel build index.html --public-url ./ --dist-dir public --no-scope-hoist"
   },
   "repository": {
     "type": "git",
