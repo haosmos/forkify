@@ -196,6 +196,7 @@
   padding: 5rem 4rem;
 
   display: flex;
+  flex-direction: column;
 
   svg {
     height: 3rem;
@@ -206,6 +207,7 @@
 
   p {
     margin-left: 1.5rem;
+    margin-top: 2rem;
     font-size: 1.8rem;
     line-height: 1.5;
     font-weight: 600;
